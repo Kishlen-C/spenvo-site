@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spenvo Privacy Policy</title>
+  <meta name="description" content="What data the Spenvo app collects, why, and who processes it.">
+  <meta name="theme-color" content="#0B1F3A">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="brand" href="index.html">Spen<span>vo</span></a>
+      <a href="index.html">Home</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html" aria-current="page">Privacy</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Privacy policy</h1>
+    <p class="muted">Last updated 2 October 2026</p>
+
+    <p>This policy explains what personal data the Spenvo app collects, why, who processes it on our behalf, and your rights. Spenvo is operated by Kishlen Chokupermal, the data controller. You can contact us at <a href="mailto:wise.wallet007@gmail.com">wise.wallet007@gmail.com</a>.</p>
+
+    <div class="card">
+      <h3>The short version</h3>
+      <ul>
+        <li>No advertising. We don't sell your data or share it for marketing.</li>
+        <li>No bank connection. Every transaction is something you enter yourself.</li>
+        <li>No analytics, crash reporting, advertising or tracking tools in the app, and no push notifications.</li>
+        <li>You can delete your account and all of its data in the app at any time.</li>
+      </ul>
+    </div>
+
+    <h2>What we collect</h2>
+
+    <h3>Account details</h3>
+    <p>Your email address and password, used to create your account and sign you in. Your password is stored by our authentication provider in hashed form; we never see it. Each account gets a random user ID, which links your data together.</p>
+
+    <h3>Budget profile</h3>
+    <p>What you enter during setup and later edit in the app:</p>
+    <ul>
+      <li>Monthly income, split into student finance (maintenance loan), scholarship and other income</li>
+      <li>Planned monthly spending per category: food &amp; restaurants, transport, accommodation, phone &amp; internet, groceries, leisure &amp; socials, and other essentials</li>
+      <li>Your target monthly balance</li>
+      <li>Your country and currency</li>
+    </ul>
+
+    <h3>Transactions</h3>
+    <p>Each income or expense you log: amount, category, optional description, date, and whether it's income or an expense. Safety Net transfers are also recorded as transactions.</p>
+
+    <h3>Savings goals</h3>
+    <p>Each goal's name, target amount, current amount, and optional category and deadline.</p>
+
+    <h3>Questions and items you send to AI features</h3>
+    <p>When you use an AI feature, the app sends the details listed under <a href="#processors">Who processes your data</a>. These requests aren't saved to your Spenvo account.</p>
+
+    <h3>Stored only on your device</h3>
+    <p>The app stores a few things on your phone so it works offline and stays signed in: your sign-in session, your selected country and currency, the weekly budget figures for the current week, and your most recent income figures. If you add a photo in Purchase Advice, it stays on your device. It is not uploaded or sent to any AI service.</p>
+
+    <h3>What we don't collect</h3>
+    <p>We don't collect your name, phone number, location, contacts, bank or card details, or advertising identifiers. We don't connect to your bank or any other financial account.</p>
+
+    <h2>Why we use it</h2>
+    <ul>
+      <li><strong>To provide the app</strong>: storing your budget, transactions and savings goals, calculating your weekly budget and running the Safety Net. Lawful basis: performance of our contract with you.</li>
+      <li><strong>To provide AI features you choose to use</strong>: answering questions, assessing a planned purchase, predicting your spending, and finding cheaper alternatives. These features only run when you ask. Lawful basis: performance of our contract with you.</li>
+      <li><strong>To keep the service secure and working</strong>: authentication, preventing misuse, and fixing errors using server logs. Lawful basis: our legitimate interest in running a secure, reliable service.</li>
+    </ul>
+
+    <h2 id="processors">Who processes your data</h2>
+    <p>We use the following service providers (processors). They act on our instructions and may not use your data for their own purposes except where their terms allow, as described below.</p>
+
+    <h3>Supabase: database and authentication</h3>
+    <p>Supabase stores your account (email address, hashed password, user ID), budget profile, transactions and savings goals, and handles sign-in. Like most hosting services, it also records technical data such as IP addresses and sign-in times in its logs. The app talks to Supabase directly for almost everything, including live updates when your transactions or budget change.</p>
+
+    <h3>Render: backend hosting</h3>
+    <p>Our backend server runs on Render. The app sends it these requests, each with your sign-in token so the server knows the request comes from your account. The server checks the token with Supabase only; it is never passed to Gemini or Tavily.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>What is sent</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Saving your budget at the end of setup</td>
+            <td>Your full budget profile (income, category budgets, target balance, country, currency). The server passes this straight to Supabase.</td>
+          </tr>
+          <tr>
+            <td>AI Advisor</td>
+            <td>The question you type, your balance, your total planned monthly budget, and how much you've spent this month.</td>
+          </tr>
+          <tr>
+            <td>Purchase Advice</td>
+            <td>The item description and price you enter, your current balance, your total planned monthly budget, and how much you've spent this month. Not your photo.</td>
+          </tr>
+          <tr>
+            <td>Spending prediction</td>
+            <td>This month's transactions (category, amount and date only, without descriptions), your budget total and per-category budgets, how much you've spent in each category, and the number of days left in the month.</td>
+          </tr>
+          <tr>
+            <td>Find Alternatives</td>
+            <td>The product description and, if you enter one, its price. This is sent to Tavily only, never to Gemini.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Render keeps routine server logs, such as the time, address and outcome of each request.</p>
+
+    <h3>Google Gemini: AI advice and predictions</h3>
+    <p>For the AI Advisor, Purchase Advice and spending prediction features, our server forwards the content listed above to Google's Gemini API to generate a response. We use Gemini on Google's paid tier, so Google does not use these prompts or responses to train its models. Google may keep them for a limited period under its API terms, for example for abuse monitoring. Find Alternatives requests are never sent to Gemini.</p>
+
+    <h3>Tavily: product search</h3>
+    <p>For Find Alternatives, our server sends only the product description (and price, if given) to Tavily as a search query to find cheaper options from online retailers. Tavily processes the query to return results.</p>
+
+    <h3>International transfers</h3>
+    <p>Some of these providers process data outside the UK, including in the United States. Where they do, we rely on UK adequacy regulations or the UK International Data Transfer Agreement / Addendum to protect your data.</p>
+
+    <h2>How long we keep it</h2>
+    <ul>
+      <li><strong>Account, budget, transactions and savings goals</strong>: for as long as your account exists. When you delete your account, they're removed from our live database straight away. Copies may remain in our providers' routine backups for a short time until those backups are overwritten.</li>
+      <li><strong>AI requests</strong>: not stored in your Spenvo account. Our AI and search providers may keep them briefly under their own terms, as described above.</li>
+      <li><strong>Server and authentication logs</strong>: kept for a limited period by Render and Supabase under their standard log retention.</li>
+      <li><strong>Data on your device</strong>: stays until you sign out, delete your account or uninstall the app.</li>
+    </ul>
+
+    <h2>Deleting your account</h2>
+    <p>In the app, go to <strong>Settings</strong>, then <strong>Delete Account</strong>, type <strong>DELETE</strong> and confirm. This permanently removes your account and all of its data: your budget profile, savings goals, every transaction, and your login. It cannot be undone. If you can't access the app, email <a href="mailto:wise.wallet007@gmail.com">wise.wallet007@gmail.com</a> from the address you signed up with and we'll delete it for you.</p>
+
+    <h2>Your rights under UK GDPR</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>access the personal data we hold about you</li>
+      <li>have inaccurate data corrected (most of it you can edit directly in the app)</li>
+      <li>have your data erased</li>
+      <li>restrict or object to how we process it</li>
+      <li>receive your data in a portable format</li>
+    </ul>
+    <p>To use any of these rights, email <a href="mailto:wise.wallet007@gmail.com">wise.wallet007@gmail.com</a>. We'll respond within one month. If you're unhappy with how we handle your data, you can complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk</a> or on 0303 123 1113.</p>
+
+    <h2>Security</h2>
+    <p>Data is sent over encrypted connections (HTTPS). Database access rules make sure each account can only read and change its own records. Account deletion runs on the server and checks your identity from your sign-in token, so nobody can delete another person's account.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If we change what we collect or who processes it, we'll update this page and the date at the top. For significant changes we'll also tell you in the app.</p>
+
+    <h2>Contact</h2>
+    <p>Kishlen Chokupermal<br>
+    <a href="mailto:wise.wallet007@gmail.com">wise.wallet007@gmail.com</a></p>
+  </main>
+
+  <footer>
+    <div>
+      &copy; 2026 Kishlen Chokupermal &middot;
+      <a href="support.html">Support</a> &middot;
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+</body>
+</html>
