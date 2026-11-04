@@ -173,6 +173,7 @@
 
     /* ---------- Sections ---------- */
     section { padding: 96px 0; }
+    section[id] { scroll-margin-top: 64px; }
     .section-head { max-width: 640px; }
     .section-head h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 700; margin-top: 12px; }
     .section-head p { margin-top: 16px; color: var(--muted); font-size: 18px; }
@@ -282,22 +283,104 @@
       html { scroll-behavior: auto; }
     }
 
+    /* ---------- Mobile download bar ---------- */
+    .mobile-bar { display: none; }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
-      .hero { padding: 48px 0 72px; }
-      .hero .wrap, .privacy .wrap, .team .wrap { grid-template-columns: 1fr; }
-      .phone-stage { margin-top: 12px; }
-      .feature-grid, .steps, .problem-grid, .extras { grid-template-columns: 1fr; }
+      .hero { padding: 40px 0 64px; }
+      .hero .wrap, .privacy .wrap, .team .wrap { grid-template-columns: 1fr; gap: 36px; }
+      .feature-grid, .steps, .extras { grid-template-columns: 1fr; }
       .site-nav { display: none; }
       .site-header .btn { margin-left: auto; }
-      section { padding: 72px 0; }
+      section { padding: 64px 0; }
+      .problem { padding-top: 16px; }
+      .section-head h2 { margin-top: 10px; }
+      .section-head p { font-size: 17px; margin-top: 12px; }
+      .feature-grid { margin-top: 32px; gap: 14px; }
+      .steps { margin-top: 32px; }
+
+      /* Swipeable rows instead of tall stacks */
+      .problem-grid, .extras {
+        display: flex; gap: 12px;
+        overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        margin: 28px -20px 0; padding: 0 20px 6px; scroll-padding: 0 20px;
+        scrollbar-width: none;
+      }
+      .problem-grid::-webkit-scrollbar, .extras::-webkit-scrollbar { display: none; }
+      .problem-grid > *, .extras > * { flex: 0 0 80%; max-width: 340px; scroll-snap-align: start; }
+      .extras { margin-top: 14px; }
+
+      .mobile-bar:not([hidden]) {
+        display: flex; align-items: center; gap: 12px;
+        position: fixed; left: 12px; right: 12px; z-index: 30;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        padding: 10px 10px 10px 12px; border-radius: 20px;
+        background: rgba(8,22,48,.94); border: 1px solid rgba(255,255,255,.12);
+        box-shadow: 0 16px 40px rgba(2,8,23,.6);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        transform: translateY(150%); transition: transform .35s ease;
+      }
+      .mobile-bar.show { transform: none; }
+      .mobile-bar img { width: 40px; height: 40px; border-radius: 11px; }
+      .mobile-bar span { flex: 1; line-height: 1.25; }
+      .mobile-bar small { display: block; font-size: 12px; color: var(--muted); }
+      .mobile-bar .btn { padding: 11px 22px; }
+      body.has-bar footer { padding-bottom: 110px; }
     }
     @media (max-width: 520px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 18px; }
+      .problem-grid, .extras { margin-left: -18px; margin-right: -18px; padding-left: 18px; padding-right: 18px; scroll-padding: 0 18px; }
+      .eyebrow { font-size: 12px; letter-spacing: .08em; }
+      .hero h1 { font-size: 46px; }
+      .hero .lede { font-size: 17px; margin-top: 16px; }
       .float-card { display: none; }
-      .phone { width: 270px; }
-      .checks { grid-template-columns: 1fr; }
-      .store { flex: 1 1 100%; }
-      .cta { padding: 48px 20px; }
+
+      /* Store buttons side by side */
+      .store-row { flex-wrap: nowrap; gap: 10px; margin-top: 26px; }
+      .store { flex: 1 1 0; min-width: 0; padding: 10px 12px; gap: 9px; border-radius: 13px; }
+      .store svg { width: 22px; height: 22px; }
+      .store small { font-size: 10px; }
+      .store strong { font-size: 16px; white-space: nowrap; }
+      .trust { font-size: 13px; gap: 6px 14px; margin-top: 18px; }
+
+      /* Smaller phone, fully visible */
+      .phone { width: 248px; border-radius: 40px; padding: 10px; }
+      .screen { border-radius: 31px; padding: 40px 14px 14px; }
+      .notch { top: 10px; width: 80px; height: 22px; }
+      .budget-card { padding: 14px; }
+      .budget-card .amt { font-size: 30px; }
+      .tx { padding: 8px 0; }
+      .tx-opt { display: none; }
+
+      .section-head h2 { font-size: 29px; }
+      .term { padding: 20px; }
+      .term .big { font-size: 25px; }
+      .feature { padding: 22px; }
+      .feature .badge { width: 42px; height: 42px; border-radius: 12px; }
+      .feature h3 { font-size: 20px; margin-top: 16px; }
+      .feature p { font-size: 16px; }
+      .feature .demo { margin-top: 16px; font-size: 13px; }
+
+      /* Steps as compact rows */
+      .steps { gap: 10px; }
+      .step { display: grid; grid-template-columns: 36px 1fr; column-gap: 14px; padding: 18px; border-radius: 18px; }
+      .step::before { grid-row: span 2; width: 36px; height: 36px; border-radius: 10px; font-size: 15px; }
+      .step h3 { margin-top: 4px; font-size: 18px; }
+      .step p { margin-top: 4px; font-size: 15px; }
+
+      .checks { grid-template-columns: 1fr; gap: 10px; }
+      .check { padding: 16px 18px; }
+      .founder { padding: 14px 16px; }
+
+      .cta { padding: 40px 18px; border-radius: 26px; }
+      .cta h2 { font-size: 30px; }
+      .cta p { font-size: 16px; }
+
+      footer { padding-top: 40px; }
+      footer nav { gap: 0 18px; }
+      footer nav a { display: inline-block; padding: 11px 0; }
     }
   </style>
 </head>
@@ -366,7 +449,7 @@
               <p class="scr-section">Recent</p>
               <div class="tx"><span class="ic">🛒</span><span class="nm">Tesco<small>Groceries</small></span><span class="v">−£18.40</span></div>
               <div class="tx"><span class="ic">🚌</span><span class="nm">Bus pass top-up<small>Transport</small></span><span class="v">−£10.00</span></div>
-              <div class="tx"><span class="ic">☕</span><span class="nm">Coffee<small>Food &amp; restaurants</small></span><span class="v">−£3.40</span></div>
+              <div class="tx tx-opt"><span class="ic">☕</span><span class="nm">Coffee<small>Food &amp; restaurants</small></span><span class="v">−£3.40</span></div>
               <div class="tx"><span class="ic">💼</span><span class="nm">Shift at café<small>Income</small></span><span class="v in">+£42.00</span></div>
             </div>
           </div>
@@ -513,6 +596,12 @@
 
   </main>
 
+  <div class="mobile-bar" data-mobile-bar hidden>
+    <img src="img/icon-256.png" alt="" width="40" height="40">
+    <span><b>Spenvo</b><small>Free · Ask before you spend</small></span>
+    <a class="btn btn-primary" data-mobile-get href="#download">Get</a>
+  </div>
+
   <footer>
     <div class="wrap">
       <a class="brand" href="#top"><img src="img/icon-256.png" alt="" width="34" height="34">Spenvo</a>
@@ -546,6 +635,32 @@
         el.querySelector('[data-label]').textContent = 'Coming soon to';
       }
     });
+
+    // Put the visitor's own store first, and on phones show a sticky "Get" bar once that store is live.
+    var ua = navigator.userAgent || '';
+    var platform = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios'
+                 : /Android/.test(ua) ? 'android' : null;
+    if (platform) {
+      document.querySelectorAll('.store-row').forEach(function (row) {
+        var mine = row.querySelector('[data-store="' + platform + '"]');
+        if (mine) row.insertBefore(mine, row.firstElementChild);
+      });
+    }
+    var bar = document.querySelector('[data-mobile-bar]');
+    if (platform && LINKS[platform] && bar) {
+      var get = bar.querySelector('[data-mobile-get]');
+      get.href = LINKS[platform]; get.target = '_blank'; get.rel = 'noopener';
+      bar.hidden = false;
+      document.body.classList.add('has-bar');
+      var hero = document.querySelector('.hero');
+      var cta = document.getElementById('download');
+      if ('IntersectionObserver' in window) {
+        var heroOut = false, ctaIn = false;
+        var update = function () { bar.classList.toggle('show', heroOut && !ctaIn); };
+        new IntersectionObserver(function (e) { heroOut = !e[0].isIntersecting; update(); }).observe(hero);
+        new IntersectionObserver(function (e) { ctaIn = e[0].isIntersecting; update(); }).observe(cta);
+      } else { bar.classList.add('show'); }
+    }
 
     if (LINKS.kickstarter) {
       document.querySelector('[data-kickstarter]').hidden = false;
